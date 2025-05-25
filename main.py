@@ -1,5 +1,5 @@
 import streamlit as st
-from utils import generate_xiaohongshu
+from utils_simple import generate_xiaohongshu_simple
 
 st.set_page_config(
     page_title="爆款小红书写作助手",
@@ -34,7 +34,7 @@ if submit and not theme:
 if submit:
     try:
         with st.spinner("AI正在思考中，请等待……"):
-            result = generate_xiaohongshu(theme, openai_api_key)
+            result = generate_xiaohongshu_simple(theme, openai_api_key)
         
         st.success("生成完成！")
         st.divider()

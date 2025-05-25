@@ -1,95 +1,93 @@
-# 爆款小红书写作助手 🌟
+# 小红书爆款写作助手 🌟
 
-一个基于AI的小红书内容生成工具，帮助用户快速创作吸引人的小红书标题和正文内容。
+基于AI的小红书内容生成工具，帮助用户快速创作吸引人的标题和正文内容。
 
-## 功能特点
+## ✨ 最新更新 (v2.0)
 
-- 🤖 基于GPT-3.5-turbo的智能内容生成
-- 📝 一次生成5个不同风格的标题
-- 📄 自动生成配套的正文内容
-- 🎨 美观的Streamlit界面
-- 🚀 支持Streamlit Cloud部署
+### 🔧 重大架构改进
+- **完全重构输出解析系统**：移除LangChain依赖，避免schema解析错误
+- **简化依赖管理**：只需要`streamlit`和`requests`两个核心依赖
+- **增强错误处理**：提供多层次的解析策略和优雅的错误恢复
+- **提升稳定性**：使用直接API调用，避免复杂框架的兼容性问题
 
-## 技术栈
+### 🚀 功能特点
+- 生成5个吸引人的小红书标题（包含emoji）
+- 生成800字以内的正文内容（包含emoji和标签）
+- 支持多种主题：健康饮食、旅行攻略、美妆护肤等
+- 智能解析AI响应，支持多种格式
+- 优雅的错误处理和默认内容
 
-- **前端框架**: Streamlit
-- **AI模型**: OpenAI GPT-3.5-turbo
-- **LLM框架**: LangChain
-- **数据验证**: Pydantic
-- **Python版本**: 3.10
+## 🛠️ 技术架构
 
-## 最新更新 (2025-01-25)
+### 核心组件
+- `main.py` - Streamlit主应用
+- `utils_simple.py` - 简化的AI调用和解析逻辑
+- `SimpleXiaohongshu` - 轻量级数据模型（不依赖pydantic）
 
-✅ **已解决Python 3.13兼容性问题**
-- 使用Python 3.10作为目标版本（更稳定）
-- 简化依赖管理，移除版本冲突
-- 修复Pydantic字段验证问题
-- 优化LangChain导入路径
+### 解析策略
+1. **标准格式解析**：识别"标题1:"和"正文:"格式
+2. **备用模式匹配**：使用正则表达式提取内容
+3. **智能行分割**：按行分析并过滤无关内容
+4. **默认内容保障**：确保始终返回有效结果
 
-## 本地运行
+## 📦 部署说明
 
-1. 克隆项目
-```bash
-git clone <your-repo-url>
-cd xiaohongshu-generator
-```
+### Streamlit Cloud部署
+1. 推送代码到GitHub
+2. 在Streamlit Cloud中连接仓库
+3. 自动部署，无需额外配置
 
-2. 安装依赖
-```bash
-pip install -r requirements.txt
-```
+### 环境要求
+- Python 3.10（通过`runtime.txt`指定）
+- 最小化依赖：只需要streamlit和requests
 
-3. 运行应用
-```bash
-streamlit run main.py
-```
+## 🔑 使用方法
 
-## Streamlit Cloud 部署
-
-1. 将代码推送到GitHub仓库
-2. 访问 [Streamlit Cloud](https://streamlit.io/cloud)
-3. 连接GitHub仓库并选择分支
-4. 确保仓库包含以下文件：
-   - `main.py` (主应用文件)
-   - `requirements.txt` (依赖列表)
-   - `runtime.txt` (Python版本)
-   - `.streamlit/config.toml` (配置文件)
-
-## 使用说明
-
-1. 在侧边栏输入您的OpenAI API密钥
-2. 在主界面输入想要创作的主题
-3. 点击"开始写作"按钮
+1. 输入OpenAI API密钥
+2. 输入创作主题
+3. 点击"开始写作"
 4. 等待AI生成内容
 
-## 故障排除
+## 🐛 故障排除
 
-### 依赖冲突问题
-如果遇到依赖版本冲突，请确保：
-- 使用Python 3.10版本
-- 清除pip缓存：`pip cache purge`
-- 重新安装依赖：`pip install -r requirements.txt --force-reinstall`
+### 常见问题解决方案
 
-### 部署问题
-- 确保所有文件都已推送到GitHub
-- 检查runtime.txt文件是否正确
-- 验证requirements.txt中的依赖格式
+#### 1. Schema解析错误
+**问题**：AI返回JSON schema而不是实际内容
+**解决方案**：已通过v2.0架构重构完全解决
 
-## 文件结构
+#### 2. 依赖冲突
+**问题**：pydantic、langchain等包版本冲突
+**解决方案**：移除所有复杂依赖，使用原生Python实现
 
-```
-├── main.py                 # 主应用文件
-├── utils.py               # 工具函数
-├── xiaohongshu_model.py   # 数据模型
-├── prompt_template.py     # 提示词模板
-├── requirements.txt       # 依赖列表
-├── runtime.txt           # Python版本
-├── .python-version       # Python版本文件
-├── .streamlit/
-│   └── config.toml       # Streamlit配置
-└── README.md             # 项目说明
-```
+#### 3. 输出格式问题
+**问题**：AI响应格式不一致
+**解决方案**：实现多层次解析策略，支持各种格式
 
-## 许可证
+### 调试信息
+应用会在控制台输出详细的调试信息：
+- AI响应原文
+- 解析过程日志
+- 错误详情
+
+## 📝 更新日志
+
+### v2.0 (2025-01-25)
+- 🔧 完全重构架构，移除LangChain依赖
+- 🚀 实现直接OpenAI API调用
+- 💡 简化数据模型，移除pydantic依赖
+- 🛡️ 增强错误处理和解析策略
+- 📦 最小化依赖，提升部署稳定性
+
+### v1.0 (初始版本)
+- 基础功能实现
+- LangChain集成
+- Pydantic数据验证
+
+## 🤝 贡献
+
+欢迎提交Issue和Pull Request来改进这个项目！
+
+## �� 许可证
 
 MIT License 

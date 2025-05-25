@@ -1,9 +1,3 @@
 # Streamlit 应用核心依赖
 streamlit
-
-# AI/LLM 依赖 - 使用兼容的版本组合
-openai
-langchain
-langchain-openai
-pydantic
 requests
