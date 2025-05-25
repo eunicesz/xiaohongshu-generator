@@ -16,7 +16,15 @@
 - **AI模型**: OpenAI GPT-3.5-turbo
 - **LLM框架**: LangChain
 - **数据验证**: Pydantic
-- **Python版本**: 3.11
+- **Python版本**: 3.10
+
+## 最新更新 (2025-01-25)
+
+✅ **已解决Python 3.13兼容性问题**
+- 使用Python 3.10作为目标版本（更稳定）
+- 简化依赖管理，移除版本冲突
+- 修复Pydantic字段验证问题
+- 优化LangChain导入路径
 
 ## 本地运行
 
@@ -54,11 +62,18 @@ streamlit run main.py
 3. 点击"开始写作"按钮
 4. 等待AI生成内容
 
-## 注意事项
+## 故障排除
 
-- 需要有效的OpenAI API密钥
-- 建议使用Python 3.11版本以确保最佳兼容性
-- 首次部署可能需要几分钟时间安装依赖
+### 依赖冲突问题
+如果遇到依赖版本冲突，请确保：
+- 使用Python 3.10版本
+- 清除pip缓存：`pip cache purge`
+- 重新安装依赖：`pip install -r requirements.txt --force-reinstall`
+
+### 部署问题
+- 确保所有文件都已推送到GitHub
+- 检查runtime.txt文件是否正确
+- 验证requirements.txt中的依赖格式
 
 ## 文件结构
 
@@ -69,6 +84,7 @@ streamlit run main.py
 ├── prompt_template.py     # 提示词模板
 ├── requirements.txt       # 依赖列表
 ├── runtime.txt           # Python版本
+├── .python-version       # Python版本文件
 ├── .streamlit/
 │   └── config.toml       # Streamlit配置
 └── README.md             # 项目说明
